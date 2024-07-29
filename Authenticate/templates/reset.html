@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'icons/fontawesome/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'icons/fontawesome/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'icons/fontawesome/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <title>Reset password</title>
+</head>
+<body>
+    <div class="text-center">
+        <h1>Change password</h1>
+    </div>
+    <div class="container">
+        <form class="model-form" action="{% url 'changepassword' %}" method="POST">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                        <label for="old_password"><i class="fa-solid fa-lock fa-lg"></i></label>
+                    </span>
+                </div>
+                {{ changepassword.old_password }}
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                        <label for="new_password1"><i class="fa-solid fa-lock fa-lg"></i></label>
+                    </span>
+                </div>
+                {{ changepassword.new_password1 }}
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                        <label for="new_password2"><i class="fa-solid fa-lock fa-lg"></i></label>
+                    </span>
+                </div>
+                {{ changepassword.new_password2 }}
+            </div>
+            <br>
+            <input class="btn btn-primary mx-5 mb-3" type="submit" value="Change password">
+            <br>
+            <a href="{% url 'home' %}" style="text-decoration: none;"> Back to home</a>
+        </form>
+        <br>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% if changepassword.errors %}
+            <div class="alert alert-danger">
+                {{ changepassword.errors }}
+            </div>
+        {% endif %}
+    </div>
+		<script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>

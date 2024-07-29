@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'icons/fontawesome/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'icons/fontawesome/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'icons/fontawesome/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <title>Login</title>
+</head>
+<body>
+    <div class="text-center">
+        <h1>Login</h1>
+    </div>
+    <div class="container">
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="form-group col-md-8 mx-5">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><label for="username"><i class="fa-solid fa-user fa-lg"></i></label></span>
+                        </div>
+                        <input class="form-control" type="text" name="username" id="username" placeholder="Username">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><label for="password"><i class="fa-solid fa-lock fa-lg"></i></label></span>
+                        </div>
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Password">  
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mx-5 btn-sm">Login</button>
+                </div>
+                <br>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </form>
+    </div>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>

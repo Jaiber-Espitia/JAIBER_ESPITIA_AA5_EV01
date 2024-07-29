@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'icons/fontawesome/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'icons/fontawesome/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'icons/fontawesome/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <title>Home</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light"> 
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <span><img src="{% static 'images/logo.png' %}" alt="logo.png" width="35" height="35"></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-10 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'products' %}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Clients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fa-solid fa-circle-user fa-xl"></i>
+                        </a>
+                        
+                        <ul class="dropdown-menu">
+                            {% if user.is_authenticated %}
+                                <li><a class="dropdown-item">{{request.user}}</a></li>
+                                <li><a href="{% url 'changepassword' %}" class="dropdown-item">Change password</a></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                            </ul>
+                        
+                        <ul class="dropdown-menu">
+                            {% else %}
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                            <li><a class="dropdown-item" href="{% url 'register' %}">Register</a></li>
+                        </ul>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>
